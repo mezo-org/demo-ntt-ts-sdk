@@ -18,12 +18,12 @@ export const DEVNET_ETH_PRIVATE_KEY =
       token: "0xeB5a5d39dE4Ea42C2Aa6A57EcA2894376683bB8E",
       manager: "0x1Ca5060BF142c58168aEdb974aABb020BC081A56",
       transceiver: {
-        wormhole: "0x812fcC0Bb8C207Fd8D6165a7a1173037F43B2dB8",
+        wormhole: "0x62d1286683507939c065C12f2d1E80cCa8CCD125",
       }
     },
     Mezo: {
       token: "0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503",
       manager: "0x20888B20e2F5F405d44261dA96467a1b1acE15be",
-      transceiver: { wormhole: "0x62d1286683507939c065C12f2d1E80cCa8CCD125" },
+      transceiver: { wormhole: "0x3106675EDE4A64d70131247466FD8704A3d42123" },
     },
   };
