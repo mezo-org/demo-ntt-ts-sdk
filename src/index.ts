@@ -15,14 +15,14 @@ import {
 
 
   (async function () {
-    const wh = new Wormhole("Testnet", [solana.Platform, evm.Platform], {
+    const wh = new Wormhole("Testnet", [evm.Platform], {
       // optional way to use private RPCs, especially recommended for mainnet 
       "chains": {
-        "Monad": {
-          "rpc": "http://127.0.0.1:8546"
+        "Sepolia": {
+          "rpc": "https://eth-sepolia.g.alchemy.com/v2/g78WWQ0EDYu4KqOX3KsrxF2VKk6LOHHd"
         },
-        "Solana": {
-          "rpc": "http://127.0.0.1:8899"
+        "Mezo": {
+          "rpc": "https://rpc.test.mezo.org"
         }
       }
     });
