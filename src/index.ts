@@ -26,8 +26,8 @@ import {
         }
       }
     });
-    const src = wh.getChain("Solana");
-    const dst = wh.getChain("Monad");
+    const src = wh.getChain("Mezo");
+    const dst = wh.getChain("Sepolia");
 
     const srcSigner = await getSigner(src);
     const dstSigner = await getSigner(dst);
