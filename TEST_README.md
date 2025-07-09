@@ -30,7 +30,7 @@ The test suite covers the following scenarios:
 
 1. **Node.js**: Ensure you have Node.js v18+ installed
 2. **Dependencies**: Install required packages
-3. **Environment Variables**: Set up your `.env` file with private keys
+3. **Environment Variables**: Set up your `.env` file with private keys and RPC URLs
 
 ### Required Environment Variables
 
