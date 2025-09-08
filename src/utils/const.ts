@@ -1,17 +1,9 @@
 import { Ntt } from "@wormhole-foundation/sdk-definitions-ntt";
-import { Chain, encoding } from "@wormhole-foundation/sdk";
+import { Chain } from "@wormhole-foundation/sdk";
 
 export type NttContracts = {
   [key in Chain]?: Ntt.Contracts;
 };
-
-export const DEVNET_SOL_PRIVATE_KEY = encoding.b58.encode(
-  new Uint8Array(
-    [218,95 //.. rest of the key
-    ])
-);
-export const DEVNET_ETH_PRIVATE_KEY =
-  "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d"; // Ganache default private key
 
 export const TEST_NTT_TOKENS: NttContracts = {
   Sepolia: {
@@ -26,6 +18,23 @@ export const TEST_NTT_TOKENS: NttContracts = {
     manager: "0x20888B20e2F5F405d44261dA96467a1b1acE15be",
     transceiver: { 
       wormhole: "0x3106675EDE4A64d70131247466FD8704A3d42123" 
+    },
+  },
+};
+
+export const NTT_TOKENS: NttContracts = {
+  Ethereum: {
+    token: "0xdD468A1DDc392dcdbEf6db6e34E89AA338F9F186",
+    manager: "0x5293158bf7a81ED05418DA497a80F7e6Dbf4477E",
+    transceiver: {
+      wormhole: "0x76ddB3f1dDe02391Ef0A28664499B74C29d18d3E",
+    }
+  },
+  Mezo: {
+    token: "0xdD468A1DDc392dcdbEf6db6e34E89AA338F9F186",
+    manager: "0x7efb386675d75280D39Aae42964A6776DE0ee0bD",
+    transceiver: { 
+      wormhole: "0x56E27f1A8425515FFD4BD76A254Ac1a5c0B66D71" 
     },
   },
 };

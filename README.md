@@ -42,46 +42,35 @@ Ensure you have the following installed on your system:
 
      ```typescript
      export const TEST_NTT_SPL22_TOKENS: NttContracts = {
-       Solana: {
-         token: "NTTSolanaTokenAddress",
-         manager: "NTTSolanaManagerAddress",
+       Mezo: {
+         token: "NTTMezoTokenAddress",
+         manager: "NTTMezoManagerAddress",
          transceiver: {
-           wormhole: "NTTSolanaTransceiverAddress",
+           wormhole: "NTTMezoTransceiverAddress",
          },
        },
-       BaseSepolia: {
-         token: "NTTBaseSepoliaTokenAddress",
-         manager: "NTTBaseSepoliaManagerAddress",
-         transceiver: { wormhole: "NTTBaseSepoliaTransceiverAddress" },
+       Sepolia: {
+         token: "NTTSepoliaTokenAddress",
+         manager: "NTTSepoliaManagerAddress",
+         transceiver: { wormhole: "NTTSepoliaTransceiverAddress" },
        },
      };
      ```
 
    - **Set Private Keys:**
-     You need to set your Ethereum and Solana private keys for this example. You can either set the env variables `ETH_PRIVATE_KEY` and `SOL_PRIVATE_KEY` OR replace this constants:
-
-     ```typescript
-     export const DEVNET_SOL_PRIVATE_KEY = encoding.b58.encode(
-       new Uint8Array(
-         [218, 95 /* ... rest of the key */]
-       )
-     );
-
-     export const DEVNET_ETH_PRIVATE_KEY =
-       "0xYourEthereumPrivateKey";
-     ```
+     You need to set your Ethereum and Mezo private keys for this example. You can either set the env variables `PRIVATE_KEY`
 
    - **Custom RPC Configuration (Optional):**
      To override the default RPC endpoints used by the SDK, provide a configuration object when initializing the Wormhole instance:
 
      ```typescript
-     const wh = new Wormhole("Testnet", [solana.Platform, evm.Platform], {
+     const wh = new Wormhole("Testnet", [Mezo.Platform, evm.Platform], {
        "chains": {
-         "BaseSepolia": {
+         "Sepolia": {
            "rpc": "https://your-base-sepolia-rpc.example.com"
          },
-         "Solana": {
-           "rpc": "https://your-solana-rpc.example.com"
+         "Mezo": {
+           "rpc": "https://your-mezo-rpc.example.com"
          }
        }
      });
@@ -97,11 +86,11 @@ npx ts-node index.ts
 
 ### Transfer Route Configuration
 
-The default script transfers tokens from BaseSepolia to Solana. To change the direction and transfer from Solana to Sepolia, modify these lines in the script:
+The default script transfers tokens from Sepolia to Mezo. To change the direction and transfer from Mezo to Sepolia, modify these lines in the script:
 
 ```typescript
-// For Solana → Sepolia
-const src = wh.getChain("Solana");
+// For Mezo → Sepolia
+const src = wh.getChain("Mezo");
 const dst = wh.getChain("Sepolia");
 ```
 
