@@ -5,50 +5,56 @@ import {
     signSendWait,
   } from "@wormhole-foundation/sdk";
   import evm from "@wormhole-foundation/sdk/platforms/evm";
-  import solana from "@wormhole-foundation/sdk/platforms/solana";
   
   // register protocol implementations
   import "@wormhole-foundation/sdk-evm-ntt";
-  import "@wormhole-foundation/sdk-solana-ntt";
-  import { TEST_NTT_TOKENS } from "./utils/const";
+  import { NTT_TOKENS } from "./utils/const";
   import { getSigner } from "./utils/helpers";
 
 
   (async function () {
-    const wh = new Wormhole("Testnet", [evm.Platform], {
-      // optional way to use private RPCs, especially recommended for mainnet 
+    // Testnet or Mainnet
+    const network = "Mainnet";
+    // change between "Sepolia" and "Ethereum"
+    const chain0 = "Ethereum";
+    // "Mezo" is same for testnet and mainnet
+    const chain1 = "Mezo";
+    // change to token amount that should be transferred
+    const MUSD_AMOUNT = "1.03";
+    
+    const wh = new Wormhole(network, [evm.Platform], {
       "chains": {
-        "Sepolia": {
-          "rpc": "https://eth-sepolia.g.alchemy.com/v2/g78WWQ0EDYu4KqOX3KsrxF2VKk6LOHHd"
+        [chain0]: {
+          "rpc": process.env.ETHEREUM_RPC_URL
         },
-        "Mezo": {
-          "rpc": "https://rpc.test.mezo.org"
+        [chain1]: {
+          "rpc": process.env.MEZO_RPC_URL
         }
       }
     });
-    const src = wh.getChain("Mezo");
-    const dst = wh.getChain("Sepolia");
+    // change accordingly
+    const src = wh.getChain(chain1);
+    const dst = wh.getChain(chain0);
 
     const srcSigner = await getSigner(src);
     const dstSigner = await getSigner(dst);
   
     const srcNtt = await src.getProtocol("Ntt", {
-      ntt: TEST_NTT_TOKENS[src.chain],
+      ntt: NTT_TOKENS[src.chain],
     });
     const dstNtt = await dst.getProtocol("Ntt", {
-      ntt: TEST_NTT_TOKENS[dst.chain],
+      ntt: NTT_TOKENS[dst.chain],
     });
   
     //TODO: change to token amount that should be transferred
     const amt = amount.units(
-      amount.parse("1.1", await srcNtt.getTokenDecimals())
+      amount.parse(MUSD_AMOUNT, await srcNtt.getTokenDecimals())
     );
   
     const xfer = () =>
       srcNtt.transfer(srcSigner.address.address, amt, dstSigner.address, {
         queue: false,
         automatic: false,
-        gasDropoff: 0n,
       });
 
     // Get calldata for simulation on tenderly (optional)
